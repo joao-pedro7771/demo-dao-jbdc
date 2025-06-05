@@ -47,9 +47,9 @@ public class Program {
 					
 					System.out.print("Enter the name of the new Department: ");
 					sc.nextLine();
-					String newDepName = sc.nextLine();
+					String newDep = sc.nextLine();
 					
-					Department newDepartment = new Department(null, newDepName);
+					Department newDepartment = new Department(null, newDep);
 					departmentDao.insert(newDepartment);
 					
 					System.out.println("Inserted! New Id: " + newDepartment.getId());
@@ -73,10 +73,10 @@ public class Program {
 				case 3: 
 					
 					System.out.print("Enter the Id of the Department to delete: ");
-					int idDelete = sc.nextInt();
+					int delete = sc.nextInt();
 					sc.nextLine();
 					
-					departmentDao.deleteById(idDelete);
+					departmentDao.deleteById(delete);
 					
 					System.out.println("Deleted Successfully!");
 					break;
@@ -91,13 +91,17 @@ public class Program {
 					System.out.println(foundDepartment);
 					break;
 					
-				default: 
+				case 5: 
 					
 					List<Department> depList = departmentDao.findAll();
 					for (Department dep : depList) {
 						System.out.println(dep);
 					}
 					break;
+					
+				default: 
+					
+					System.out.println("Invalid Option!");
 					
 				}
 				
@@ -119,10 +123,10 @@ public class Program {
 					
 					System.out.print("Name of new Seller: ");
 					sc.nextLine();
-					String newName = sc.nextLine();
+					String name = sc.nextLine();
 					
 					System.out.print("Email: ");
-					String newEmail = sc.nextLine();
+					String email = sc.nextLine();
 					
 					System.out.print("Birth Date: ");
 					Date birthDate = sdf.parse(sc.nextLine());
@@ -134,7 +138,7 @@ public class Program {
 					int insertId = sc.nextInt();
 					sc.nextLine();
 					
-					Seller newSeller = new Seller(null, newName, newEmail, birthDate, baseSalary, new Department(insertId, null));
+					Seller newSeller = new Seller(null, name, email, birthDate, baseSalary, new Department(insertId, null));
 					sellerDao.insert(newSeller);
 					
 					System.out.println("Inserted! New Id: " + newSeller.getId());
@@ -158,10 +162,10 @@ public class Program {
 				case 3:
 					
 					System.out.print("Enter Id of the Seller to delete: ");
-					int idDelete = sc.nextInt();
+					int delete = sc.nextInt();
 					sc.nextLine();
 					
-					sellerDao.deleteById(idDelete);
+					sellerDao.deleteById(delete);
 					System.out.println("Deleted Successfully!");
 					break;
 					
@@ -171,30 +175,34 @@ public class Program {
 					int findId = sc.nextInt();
 					sc.nextLine();
 					
-					Seller seller = sellerDao.findById(findId);
-					System.out.println(seller);
+					Seller foundSeller = sellerDao.findById(findId);
+					System.out.println(foundSeller);
 					break;
 					
 				case 5:
 					
 					System.out.print("Enter the Id of the Department: ");
-					int idDep = sc.nextInt();
+					int depId = sc.nextInt();
 					sc.nextLine();
 					
-					List<Seller> sellerList = sellerDao.findByDepartment(new Department(idDep, null));
+					List<Seller> sellerList = sellerDao.findByDepartment(new Department(depId, null));
 					
-					for (Seller obj : sellerList) {
-						System.out.println(obj);
+					for (Seller seller : sellerList) {
+						System.out.println(seller);
 					}
 					break;
 				
-				default:
+				case 6:
 					
 					sellerList = sellerDao.findAll();
-					for (Seller obj : sellerList) {
-						System.out.println(obj);
+					for (Seller seller : sellerList) {
+						System.out.println(seller);
 					}
 					break;
+					
+				default:
+					
+					System.out.println("Invalid Option!");
 					
 				}
 				
